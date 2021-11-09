@@ -6,6 +6,7 @@ class Engine:
         self._keyboard = Controller()
         self._keyboardtyper = KeyboardTyper()
         self._buffer = []
+        self._prev_kv = (None,None)
         self.database = database
         with Listener(on_press=self._on_press, on_release=self._on_release) as listener:
             listener.join()
@@ -15,47 +16,66 @@ class Engine:
             return True
     
     def _is_delimiter(self,key):
-        return key in [Key.space, Key.enter] 
+        return type(key) is Key and key in [Key.space, Key.enter, Key.tab] 
 
 
     def _tokenize(self):
         token=''
-        backspaces=0
+        backspaces=1
         for key in self._buffer[::-1]:
             if key == Key.backspace:
                 backspaces+=1
                 
             if type(key) is KeyCode:
-                if backspaces==-1:
+                if backspaces==0:
                     token=str(key)[1]+token
-                else:
+                elif backspaces > 0:
                     backspaces-=1
-            if type(key) is Key and self._is_delimiter(key):
+            if backspaces>0 and self._is_delimiter(key):
                 backspaces -= 1
+            elif backspaces==0 and self._is_delimiter(key):
+                return
 
             print("****", token)
             """Check if token is valid""" 
-            if(len(token)!=0 and token[0]=='@'):
+            if len(token) != 0 and token[0] == '@': #Pattern Recognition
                 print(token)
-                self._type_if_present(token)
-                return 
+                value = self._type_if_present(token) 
+                if value is not None: #word  found
+                    return token, value
 
     #@ho     =>@ h o space tab enter backspace m e  
 
+    def _type(self, wordRemoved, wordTyped):
+        self._keyboardtyper.backspace(len(wordRemoved)+1)
+        self._keyboardtyper.type_string(wordTyped) #type word with extra space
+        return wordTyped
+    
     def _type_if_present(self, word):
         if (value := self.database.get_value(word)) is not None:
-            self._keyboardtyper.backspace(len(word)+1)
-            self._keyboardtyper.type_string(value)
+            return self._type(word, value)
+    
+    def _is_backspace(self, key):
+        return type(key) is Key and key == Key.backspace
 
     def _on_press(self, key):
         """Gets all the key presses """
         print(f'{key} pressed and buffer: {self._buffer}')
         self._buffer.append(key)
-        if self._is_delimiter(key):
-            self._tokenize()
-            
+        print("$$$$$")
+        print(self._prev_kv)
+        # if self._prev_kv is not None and self._prev_kv[1] is not None and self._is_backspace(key):
+        #     print(self._prev_kv)
+        #     #remove value
+        #     #type token
+        #     #remove token from buffer
+        #     self._type(self._prev_kv[1],self._prev_kv[0])
+        #     self._prev_kv = (None, None)
 
-            
+        if self._is_delimiter(key):
+            self._prev_kv = self._tokenize()
+            print(self._prev_kv)
+            #remove token,value from buffer
 
     def _on_release(self, key):
         # print('Key released: {0}'.format(key))

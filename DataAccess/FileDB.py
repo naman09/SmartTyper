@@ -1,6 +1,10 @@
 class FileDB:
     def __init__(self):
-        self.words = {'@home':'test'}
+        self._words = {'@home':'test'}
+        self.i = 0
 
     def get_value(self,word):
-        return self.words.get(word.lower())
+        if word.lower() == '@home':
+            self.i += 1
+            self._words["@home"] = 'tet' + str(self.i)
+        return self._words.get(word.lower())
