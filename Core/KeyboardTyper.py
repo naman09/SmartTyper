@@ -16,4 +16,3 @@ class KeyboardTyper:
     def type_string(self, line):
         for char in line: 
             self.hit(char)
-        self.hit(' ')
