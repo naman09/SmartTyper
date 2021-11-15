@@ -1,4 +1,0 @@
-
-TODO:
-Backspace at the end of token, not working.
-Undo operation using backspace, not implemented.

@@ -1,5 +1,5 @@
 from pynput.keyboard import Key, KeyCode, Listener, Controller 
-from Core.KeyboardTyper import KeyboardTyper
+from Backend.Core.KeyboardTyper import KeyboardTyper
  
 class Engine:
     def __init__(self, database):
@@ -11,6 +11,9 @@ class Engine:
         self._python_typed = 0
         with Listener(on_press=self._on_press, on_release=self._on_release) as listener:
             listener.join()
+
+    def stop_engine(self):
+        self._keyboardtyper.esc()
     
     def _is_delimiter(self,key):
         return type(key) is Key and key in [Key.space, Key.enter, Key.tab] 
@@ -90,6 +93,7 @@ class Engine:
         # print('Key released: {0}'.format(key))
         if key == Key.esc:
             # Stop listener
+            print("Engine stopped")
             return False
 
 
