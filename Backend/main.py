@@ -1,16 +1,23 @@
 from pynput.keyboard import Key, Listener, Controller 
-from Backend.Core.Engine import Engine
-from Backend.Core.KeyboardTyper import KeyboardTyper
-from Backend.DataAccess.FileDB import FileDB
-
+from Core.Engine import Engine
+from Core.KeyboardTyper import KeyboardTyper
+from DataAccess.FileDB import FileDB
+import sys
 
 def run_app():
+    print('Backend started!')
     dObj = FileDB()
     Engine(dObj)
 
 def stop_app():
+    print('Backend stopped!')
     KeyboardTyper().esc()
 
 
 if __name__== "__main__":
-    run_app()
+    if sys.argv[1] == 'stop':
+        stop_app()
+    else:
+        run_app()
+
+

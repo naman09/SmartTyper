@@ -1,5 +1,5 @@
 from pynput.keyboard import Key, KeyCode, Listener, Controller 
-from Backend.Core.KeyboardTyper import KeyboardTyper
+from Core.KeyboardTyper import KeyboardTyper
  
 class Engine:
     def __init__(self, database):
@@ -67,16 +67,16 @@ class Engine:
         
     def _on_press(self, key):
         """Gets all the key presses """
-        print(f'{key} pressed')
+        # print(f'{key} pressed')
         if self._python_typed > 0:
             self._python_typed -= 1
             return
         self._buffer.append(key)
-        print(f'buffer: {self._buffer}')
-        print("$$$$$")
-        print(self._prev_kv)
+        # print(f'buffer: {self._buffer}')
+        # print("$$$$$")
+        # print(self._prev_kv)
         if self._prev_kv is not None and self._prev_kv[1] is not None and self._is_backspace(key):
-            print(self._prev_kv)
+            # print(self._prev_kv)
             #remove value
             #type token
             #remove token from buffer
@@ -85,7 +85,7 @@ class Engine:
 
         # if self._is_delimiter(key):
         self._prev_kv = self._tokenize()
-        print(self._prev_kv)
+        # print(self._prev_kv)
 
         #remove token,value from buffer
 

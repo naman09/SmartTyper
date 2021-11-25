@@ -1,0 +1,1 @@
+print("JS from python");
