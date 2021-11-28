@@ -23,6 +23,18 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+
+.key-value-list {
+	margin-top:10%;
+	height: 30%;
+	overflow-y: auto;
+}
+
+.edit-btn, .del-btn {
+	all: unset;
+	cursor: pointer;
+}
+
 #app {
 	width: 80px;
 	height: 80px;
@@ -111,17 +123,4 @@ body {
 	height: 56%;
 	left: 63%;
 	transform: rotate(55deg) translateY(16px) translateX(2px);
-}
-
-
-
-.key-value-list {
-	margin-top:5%;
-	height: 200px;
-	overflow-y: auto;
-}
-
-.edit-btn, .del-btn {
-	all: unset;
-	cursor: pointer;
 }

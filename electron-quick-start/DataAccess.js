@@ -1,22 +1,16 @@
 const fs = require('fs/promises');
 const {createWriteStream} = require('fs');
 
-// const dbFile = "../database.txt";
-
-
-// fs.appendFile(dbFile, "@email : jjjjjj@example.wddwwdyom\n").then(result => {
-//     console.log(result);
-//     logFileText(dbFile);
-// });
-
-// entry = { key: "some-key", value: "some-value" }
-// {key1 : value1, key2: value2}
-window.DataAccess = class DataAccess {
+export default class DataAccess {
 
     constructor() {
         console.log("Creating Data Access Obj");
         this.dbFilePath = "../database.txt";
-        fs.readFile(this.dbFilePath).then(data => {
+        
+    }
+
+    readFile() {
+        return fs.readFile(this.dbFilePath).then(data => {
             this.entries = JSON.parse(data);
         }); 
     }
@@ -24,26 +18,22 @@ window.DataAccess = class DataAccess {
     writeToFile() {
         console.log(this.entries);
         const writer = createWriteStream(this.dbFilePath);
-        console.log(this.entries);
         writer.write(JSON.stringify(this.entries)); 
     } 
-
-    async readFromFile() {
-       
-    }
-
+  
     //returns Id or null if already exists
     addEntry(entry) {
         console.log('Add Entry')
-        if (!this.isEntryPresent(entry)) return null;
+        if (this.isEntryPresent(entry)) return null;
         this.entries[entry.key] = entry.value;
         this.writeToFile();
         console.log('Entries '+this.entries);
         return entry.key;
     }
-
+  
     //returns Id or null if not present
     updateEntry(entry) {
+        console.log("Update Entry");
         if(!this.isEntryPresent(entry)) return null;
         this.entries[entry.key]=entry.value;
         this.writeToFile();
@@ -53,6 +43,7 @@ window.DataAccess = class DataAccess {
     //get all key-value pairs
     getAllEntries() {
         console.log("Get All Entries");
+        console.log(this.entries);
         return this.entries;
     }
     
@@ -65,5 +56,6 @@ window.DataAccess = class DataAccess {
     deleteEntry(entry) {
         if(!this.isEntryPresent(entry)) return;
         delete this.entries[entry.key];
+        this.writeToFile();
     }
-}
+  }
