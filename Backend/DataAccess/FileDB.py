@@ -1,15 +1,25 @@
+import json
+import os 
+
 class FileDB:
     def __init__(self):
-        self._words = {'@pass1':'password','@user':'demonkinglollololroxx','@home':'test','@aadhaar':'XXXX-XXXXX-XXXX','@pan':'XXXXXXXXX','@adr1':'House No.X, Road Y','@adr2':'Delhi-1100XX','@phone':'9999999999','@name':'Shubham Pal', '@email':'namanjain9101999@gmail.com'}
-        self.i = 0
+        dir = os.path.dirname(__file__)
+        self._db_file_path = os.path.join(dir, '../../database.txt')
+        self._last_modified_time = ''
+        self._initialize_from_file()
 
     def _initialize_from_file(self):
-        with open("database.txt") as f:
-            for [key,value] in f.split():
-                self._words[key] = value
+        print("Initializing from file...")
+        with open(self._db_file_path) as f:
+            data = json.load(f)
+            self._words = data
+            self._last_modified_time = os.path.getmtime(self._db_file_path)
+
+    def _isModified(self):
+        recent_update_time = os.path.getmtime(self._db_file_path)
+        return recent_update_time != self._last_modified_time
 
     def get_value(self,word):
-        # if word.lower() == '@home':
-        #     self.i += 1
-        #     self._words["@home"] = 'tet' + str(self.i)
+        if self._isModified(): 
+            self._initialize_from_file()
         return self._words.get(word.lower())
