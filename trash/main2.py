@@ -1,1 +1,0 @@
-print("JS from python");

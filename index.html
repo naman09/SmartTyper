@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>SmartTyper</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/playpausebtn.css">
+  </head>
+  <body id="back">
+    
+    <div class="container">
+      <br/> <br/>
+      <!-- Start/Stop button -->
+      <div class="btncontainer mx-auto" onclick="toggleAppState()">
+        <div id="app">
+          <div class="pause">
+            <div class="line line_1"></div>
+            <div class="line line_2"></div>
+          </div>
+          <div class="play active">
+            <div class="line line_1"></div>
+            <div class="line line_2"></div>
+            <div class="line line_3"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Key-value table -->
+      <div class="key-value-list">
+        <table class="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Key</th>
+              <th scope="col">Value</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="key-value-list-tbody">
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary theme-color-gold" data-toggle="modal" data-target="#addNewModal">
+        Add
+      </button>
+
+      <!-- Add Key-Value Modal -->
+      <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="addNewLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content theme-color-black">
+            <div class="modal-header">
+              <h5 class="modal-title theme-color-white" id="addNewLabel">Add Key-Value</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="theme-color-white">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                  <label for="key" class="col-sm-2 col-form-label theme-color-white">Key </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="newKey" aria-describedby="keyHelp" placeholder="@name">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="value" class="col-sm-2 col-form-label theme-color-white">Value </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="newValue" placeholder="Josh">
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary theme-color-gold" data-dismiss="modal" onclick="addNewKeyValue()">Save changes</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-dialog modal-sm">
+        </div>
+      </div>
+
+      <!-- Edit Key-Value Modal -->
+      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content theme-color-black">
+            <div class="modal-header">
+              <h5 class="modal-title theme-color-white" id="editLabel">Edit Key-Value</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="theme-color-white">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                  <label for="key" class="col-sm-2 col-form-label theme-color-white">Key </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="oldKey" aria-describedby="keyHelp" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="value" class="col-sm-2 col-form-label theme-color-white">Value </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="oldValue">
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="edit-save" type="button" class="btn btn-primary theme-color-gold" data-dismiss="modal">Save changes</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-dialog modal-sm">
+        </div>
+      </div>
+    </div>
+    <script>if (typeof module === 'object') window.module = module; module = undefined;</script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>if (window.module) module = window.module;</script>
+  </body>
+</html>
+<script src="scripts/DOMInteractions.js" type="module"></script>
+<script src="scripts/renderer.js"></script>
+<script src="scripts/playpausebtn.js"></script>
