@@ -1,11 +1,9 @@
 import DataAccess from './DataAccess.js';
-import { startApp, stopApp } from './Linker.js';
 
-let appState = 0; //0 means stop
 let keysAdded = 0;
 
 const dataAccessObj = new DataAccess();
-dataAccessObj.readFile().then( () => {
+dataAccessObj.readFile().then(() => {
   showKeyValueList();
 });
 
@@ -25,7 +23,7 @@ function addNewRow(key, value) {
   tdValue.id = "value" + keysAdded;
   tdValue.innerHTML = value;
 
-  let tdAction =document.createElement('td');
+  let tdAction = document.createElement('td');
 
   let editButton = document.createElement('button');
   editButton.innerHTML = "<i class='bi bi-pencil-square'></i>";
@@ -98,7 +96,7 @@ function editSaveKeyValue(id) {
 
   dataAccessObj.updateEntry(getKeyValue(id));
 
-  
+
 }
 
 function addNewKeyValue() {
@@ -114,13 +112,7 @@ function addNewKeyValue() {
   document.getElementById("newKey").value = '';
   document.getElementById("newValue").value = '';
 
-  dataAccessObj.addEntry({"key":key,"value":value});
-}
-
-function toggleAppState() {
-  if (appState === 0) startApp();
-  else stopApp();
-  appState = 1 - appState;
+  dataAccessObj.addEntry({ "key": key, "value": value });
 }
 
 window.addNewKeyValue = addNewKeyValue;

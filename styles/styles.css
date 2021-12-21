@@ -32,7 +32,6 @@ body {
 }
 
 .key-value-list {
-	margin-top:10%;
 	height: 35%;
 	overflow-y: auto;
 }

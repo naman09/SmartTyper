@@ -1,5 +1,5 @@
 const fs = require('fs/promises');
-const {createWriteStream} = require('fs');
+const { createWriteStream } = require('fs');
 require('dotenv').config();
 var fernet = require('fernet');
 

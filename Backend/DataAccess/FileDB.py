@@ -4,9 +4,7 @@ from cryptography.fernet import Fernet
 
 class FileDB:
     def __init__(self):
-        dir = os.path.dirname(__file__)
-        # self._db_file_path = os.path.join(dir, '../../database.txt')
-        self._db_file_path = 'C:/dev/Nodejs/electron Apps/electron-quick-start/database.txt'
+        self._db_file_path = 'database.txt' #path relative to main.exe
         self._last_modified_time = ''
         self._initialize_from_file()
 

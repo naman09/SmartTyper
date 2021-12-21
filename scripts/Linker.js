@@ -1,6 +1,17 @@
 const path = require('path');
-var child = require('child_process').execFile;
-var executablePath = "./backend.exe";
+const child = require('child_process').execFile;
+const executablePath = "./backend.exe";
+
+let appState = 0; //0 means stop
+function toggleAppState() {
+    if (appState === 0) startApp();
+    else stopApp();
+    appState = 1 - appState;
+}
+
+function getState() {
+    return appState;
+}
 
 function executeBackend(parameters) {
     child(executablePath, parameters, function(err, data) {
@@ -20,4 +31,4 @@ function stopApp() {
     executeBackend(["stop"]);
 }
 
-export { startApp, stopApp };
+
