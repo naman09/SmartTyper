@@ -1,6 +1,6 @@
 const path = require('path');
 const child = require('child_process').execFile;
-const executablePath = "./backend.exe";
+const executablePath = path.join(__dirname, 'backend.exe');
 
 let appState = 0; //0 means stop
 function toggleAppState() {

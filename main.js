@@ -15,7 +15,7 @@ function createWindow() {
     width: 800,
     height: 700,
     title: "Smart Typer",
-    icon: 'icon.jpeg',
+    icon: path.join(__dirname, 'icon.ico'),
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -40,7 +40,7 @@ function createWindow() {
     return false;
   });
 
-  tray = new Tray("./icon.jpeg");
+  tray = new Tray(path.join(__dirname, 'icon.ico'));
 
   var contextMenu = Menu.buildFromTemplate([
     {

@@ -1,7 +1,7 @@
 const fs = require('fs/promises');
 const { createWriteStream } = require('fs');
 require('dotenv').config();
-var fernet = require('fernet');
+const fernet = require('fernet');
 
 export default class DataAccess {
 
