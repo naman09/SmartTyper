@@ -8,11 +8,13 @@ Detect personal info across whole OS, and provide smart typing functionalities.
 2. Unzip the file
 3. Go to environment variables
 4. Add new user variable
-5. Name - `SECRET` and value - `mnxYXH3oxyyzCFrjBoS8FE5LKQlKepVgzVzk3kpc0Ac=`
+5. Give it's name - `SECRET` and value - `mnxYXH3oxyyzCFrjBoS8FE5LKQlKepVgzVzk3kpc0Ac=`
 6. Now run the smart-typer.exe in the unzipped folder
 
 ### Screenshots
-
+<img src="sc/1.PNG">
+<img src="sc/2.PNG">
+<img src="sc/3.png">
 
 
 ### Packaging
