@@ -4,7 +4,7 @@ Detect personal info across whole OS, and provide smart typing functionalities.
 `Note - packaged app is targeted for windows only. You can package app again with electron builder to run on another platform.`
 
 ### Installation
-1. Download the [packaged app](https://drive.google.com/file/d/1W5-Cwma6X3qFzsetbzFIVF9iEYkoN68m/view?usp=sharing)
+1. Download the [packaged app](https://drive.google.com/file/d/1kxI23fdzIHSCjU6jbCc1ljDQGtKjUXRS/view?usp=sharing)
 2. Unzip the file
 3. Go to environment variables
 4. Add new user variable
@@ -17,8 +17,8 @@ Detect personal info across whole OS, and provide smart typing functionalities.
 <img src="sc/3.png">
 
 
-### Packaging
 
+### Packaging
 1. Install electron builder
 2. Create a folder name build, include icon file.
 3. Update package.json. 
